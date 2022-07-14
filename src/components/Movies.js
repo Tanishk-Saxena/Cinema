@@ -5,7 +5,7 @@ const Movies = ({movies, fetchMovies, url}) => {
 
   useEffect(() => {
     fetchMovies(url);
-  }, [url]);
+  }, []);
 
   return (
     <div>

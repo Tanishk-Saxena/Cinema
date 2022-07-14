@@ -43,16 +43,16 @@ function App() {
       </form>
     </header> */}
     <Switch>
-      <Route exact path="/" element={<Movies movies={movies} fetchMovies={fetchMovies} url={trending_api}/>}/>
-      <Route exact path="/trending" element={<Movies movies={movies} fetchMovies={fetchMovies} url={trending_api}/>}/>
-      <Route exact path="/movies/popular" element={<Movies Movies movies={movies} fetchMovies={fetchMovies} url={popular_movies_api}/>}/>
-      <Route exact path="/movies/toprated" element={<Movies movies={movies} fetchMovies={fetchMovies} url={top_rated_movies_api}/>}/>
-      <Route exact path="/movies/nowplaying" element={<Movies movies={movies} fetchMovies={fetchMovies} url={now_playin_movies_api}/>}/>
-      <Route exact path="/movies/upcoming" element={<Movies movies={movies} fetchMovies={fetchMovies} url={upcoming_movies_api}/>}/>
-      <Route exact path="/tv/popular" element={<Movies movies={movies} fetchMovies={fetchMovies} url={popular_tv_api}/>}/>
-      <Route exact path="/tv/toprated" element={<Movies movies={movies} fetchMovies={fetchMovies} url={top_rated_tv_api}/>}/>
-      <Route exact path="/tv/currentlyonair" element={<Movies movies={movies} fetchMovies={fetchMovies} url={tv_on_the_air_api}/>}/>
-      <Route exact path="/tv/airingtoday" element={<Movies movies={movies} fetchMovies={fetchMovies} url={tv_airing_today_api}/>}/>
+      <Route exact path="/" element={<Movies key="/" movies={movies} fetchMovies={fetchMovies} url={trending_api}/>}/>
+      <Route exact path="/trending" element={<Movies key="/trending" movies={movies} fetchMovies={fetchMovies} url={trending_api}/>}/>
+      <Route exact path="/movies/popular" element={<Movies key="/movies/popular" Movies movies={movies} fetchMovies={fetchMovies} url={popular_movies_api}/>}/>
+      <Route exact path="/movies/toprated" element={<Movies key="/movies/toprated" movies={movies} fetchMovies={fetchMovies} url={top_rated_movies_api}/>}/>
+      <Route exact path="/movies/nowplaying" element={<Movies key="/movies/nowplaying" movies={movies} fetchMovies={fetchMovies} url={now_playin_movies_api}/>}/>
+      <Route exact path="/movies/upcoming" element={<Movies key="/movies/upcoming" movies={movies} fetchMovies={fetchMovies} url={upcoming_movies_api}/>}/>
+      <Route exact path="/tv/popular" element={<Movies key="/tv/popular" movies={movies} fetchMovies={fetchMovies} url={popular_tv_api}/>}/>
+      <Route exact path="/tv/toprated" element={<Movies key="/tv/toprated" movies={movies} fetchMovies={fetchMovies} url={top_rated_tv_api}/>}/>
+      <Route exact path="/tv/currentlyonair" element={<Movies key="/tv/currentlyonair" movies={movies} fetchMovies={fetchMovies} url={tv_on_the_air_api}/>}/>
+      <Route exact path="/tv/airingtoday" element={<Movies key="/tv/airingtoday" movies={movies} fetchMovies={fetchMovies} url={tv_airing_today_api}/>}/>
     </Switch>
     </Router>
     </>
