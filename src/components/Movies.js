@@ -1,14 +1,11 @@
 import React, {useEffect} from 'react';
 import Movie from './Movie';
 
-const Movies = ({movies, fetchMovies}) => {
-
-  const api_key="84e148ae58ace41622a3e87961fb231d";
-  const featured_api= `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${api_key}&page=1`
+const Movies = ({movies, fetchMovies, url}) => {
 
   useEffect(() => {
-    fetchMovies(featured_api);
-  }, []);
+    fetchMovies(url);
+  }, [url]);
 
   return (
     <div>
@@ -21,7 +18,7 @@ const Movies = ({movies, fetchMovies}) => {
         </div>
     </div>
   )
-  
+
 }
 
 export default Movies
