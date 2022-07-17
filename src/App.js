@@ -6,8 +6,6 @@ import {
   Route
 } from "react-router-dom";
 import List from './components/List';
-import Search from './components/Search';
-
 
 function App() {
 
@@ -36,7 +34,7 @@ function App() {
       </form>
     </header> */}
     <Switch>
-      <Route exact path="/search" element={<Search key={`/search/${actualSearchTerm}`} title={`Showing search results for: ${actualSearchTerm}`} url={`${search_api}${actualSearchTerm}`} actualSearchTerm={actualSearchTerm}/>}/>
+      <Route exact path="/search" element={<List key={`/search/${actualSearchTerm}`} title={`Showing search results for: ${actualSearchTerm}`} url={`${search_api}${actualSearchTerm}`} actualSearchTerm={actualSearchTerm}/>}/>
       <Route exact path="/" element={<List key="/" title={"Welcome to Cinema! Find your next binge..."} url={trending_api}/>}/>
       <Route exact path="/trending" element={<List key="/trending" title={"Trending Movies and TV Series"} url={trending_api}/>}/>
       <Route exact path="/movies/popular" element={<List key="/movies/popular" title={"Popular Movies"} url={popular_movies_api}/>}/>
