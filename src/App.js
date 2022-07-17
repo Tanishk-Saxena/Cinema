@@ -6,11 +6,12 @@ import {
   Route
 } from "react-router-dom";
 import List from './components/List';
+import Search from './components/Search';
 
 
 function App() {
 
-
+  const [actualSearchTerm, setActualSearchTerm] = useState('');
   const api_key=process.env.REACT_APP_API_KEY;
 
   const trending_api= `https://api.themoviedb.org/3/trending/all/day?api_key=${api_key}`;
@@ -28,14 +29,14 @@ function App() {
   return (
     <>
     <Router>
-    <Navbar/>
+    <Navbar setActualSearchTerm={setActualSearchTerm}/>
     {/* <header>
       <form onSubmit={handleOnSubmit}>
         <input type="search" value={searchTerm} onChange={handleOnChange} placeholder='Search...' className="search" />
       </form>
     </header> */}
     <Switch>
-      <Route exact path="/search" element={<List key="/search" title={"Search Results"} url={search_api}/>}/>
+      <Route exact path="/search" element={<Search key={`/search/${actualSearchTerm}`} title={`Showing search results for: ${actualSearchTerm}`} url={`${search_api}${actualSearchTerm}`} actualSearchTerm={actualSearchTerm}/>}/>
       <Route exact path="/" element={<List key="/" title={"Welcome to Cinema! Find your next binge..."} url={trending_api}/>}/>
       <Route exact path="/trending" element={<List key="/trending" title={"Trending Movies and TV Series"} url={trending_api}/>}/>
       <Route exact path="/movies/popular" element={<List key="/movies/popular" title={"Popular Movies"} url={popular_movies_api}/>}/>

@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Navbar = ({}) => {
+const Navbar = ({setActualSearchTerm}) => {
 
     const [searchTerm, setSearchTerm] = useState('');
+    let navigate=useNavigate();
 
     const handleOnChange = (e) => {
         setSearchTerm(e.target.value);
@@ -11,7 +12,13 @@ const Navbar = ({}) => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        setSearchTerm('');
+        if(searchTerm.length<=0){
+            navigate("/");
+        }else{
+            setSearchTerm('');
+            setActualSearchTerm(searchTerm);
+            navigate(`/search`);
+        }
     }
     
     return (
@@ -50,9 +57,9 @@ const Navbar = ({}) => {
                         </ul>
                         </li>
                     </ul>
-                    <form className="d-flex" role="search" action="/search">
+                    <form className="d-flex" role="search" onSubmit={handleOnSubmit}>
                         <input className="form-control me-2" value={searchTerm} onChange={handleOnChange} type="search" placeholder="Search..." aria-label="Search"/>
-                        <button className="btn btn-primary" type="submit">Search</button>
+                        <button disabled={searchTerm.length<=0} className="btn btn-primary" type="submit">Search</button>
                     </form>
                     </div>
                 </div>
