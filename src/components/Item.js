@@ -15,9 +15,11 @@ const Item = (props) => {
         }
     }
 
-    const {media_type, poster_path, overview, vote_average, title, name} = props.data;
+    let {media_type, poster_path, overview, vote_average, title, name} = props.data;
     let itemName;
-    
+    if(!vote_average){
+      vote_average=0;  
+    }
     if(media_type === "movie" || title) {
         itemName=title;
     }else if(media_type === "tv" || name){
