@@ -14,7 +14,7 @@ const Search = ({url, title, actualSearchTerm}) => {
   const fetchList = async (api) => {
     const listResponse = await fetch(api);
     const listJSON = await listResponse.json();
-    console.log(listJSON);
+    // console.log(listJSON);
     setList(listJSON.results);
   }
 
