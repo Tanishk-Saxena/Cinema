@@ -32,7 +32,7 @@ const Search = ({url, title, actualSearchTerm}) => {
       return;//so that the fetchList statement below doesn't get called and console is clean of any errors
     }
     fetchList(url);
-  }, []);
+  });
 
   return (
     <InfiniteScroll
