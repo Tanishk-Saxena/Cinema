@@ -34,6 +34,7 @@ const Search = ({url, title, actualSearchTerm}) => {
       return;//so that the fetchList statement below doesn't get called and console is clean of any errors
     }
     fetchList(url);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
