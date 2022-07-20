@@ -10,11 +10,13 @@ const Search = ({url, title, actualSearchTerm}) => {
 
   const [page, setPage] = useState(1);
   const [list, setList] = useState([]);
+  const [totalResults, setTotalResults] = useState(0);
 
   const fetchList = async (api) => {
     const listResponse = await fetch(api);
     const listJSON = await listResponse.json();
     // console.log(listJSON);
+    setTotalResults(listJSON.total_results);
     setList(listJSON.results);
   }
 
@@ -32,13 +34,13 @@ const Search = ({url, title, actualSearchTerm}) => {
       return;//so that the fetchList statement below doesn't get called and console is clean of any errors
     }
     fetchList(url);
-  });
+  }, []);
 
   return (
     <InfiniteScroll
       dataLength={list.length} //This is important field to render the next data
       next={()=>{fetchMore(url, page)}}
-      hasMore={true}
+      hasMore={list.length<totalResults}
       loader={<Spinner/>}
       endMessage={
         <p style={{ textAlign: 'center' }}>
