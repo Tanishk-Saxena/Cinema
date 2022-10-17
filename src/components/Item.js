@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Item = (props) => {
     const images_api= "https://image.tmdb.org/t/p/w1280"
@@ -15,7 +16,7 @@ const Item = (props) => {
         }
     }
 
-    let {media_type, poster_path, overview, vote_average, title, name} = props.data;
+    let {media_type, poster_path, overview, vote_average, title, name, id} = props.data;
     let itemName;
     if(!vote_average){
       vote_average=0;  
@@ -36,6 +37,7 @@ const Item = (props) => {
             <div className="movie-over">
                 <h2>Overview: </h2>
                 <p>{overview}</p>
+                <Link to={`/details/${media_type}/${id}`}><button className="read-more-btn">Read More</button></Link>
             </div>
         </div>
     )

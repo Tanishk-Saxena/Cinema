@@ -6,6 +6,7 @@ import {
   Route
 } from "react-router-dom";
 import List from './components/List';
+import Details from './components/Details';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
       <Route exact path="/tv/toprated" element={<List key="/tv/toprated" title={"Top-rated TV Shows of all time"} url={top_rated_tv_api}/>}/>
       <Route exact path="/tv/currentlyonair" element={<List key="/tv/currentlyonair" title={"TV Shows currently on air"} url={tv_on_the_air_api}/>}/>
       <Route exact path="/tv/airingtoday" element={<List key="/tv/airingtoday" title={"TV Shows airing today"} url={tv_airing_today_api}/>}/>
+      <Route exact path="/details/:media_type/:id" element={<Details key="/details/:media_type/:id"/>}/>
     </Switch>
     </Router>
     </>

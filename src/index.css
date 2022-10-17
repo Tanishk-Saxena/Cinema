@@ -81,6 +81,24 @@ code {
   box-shadow: 0 -3px 5px rgba(0, 0, 0, 0.1);
 }
 
+.read-more-btn {
+  outline-style: none;
+  border-style: solid;
+  border-color: darkred;
+  border-radius: 40px;
+  padding: 5px;
+  color: white;
+  background-color: rgb(206, 0, 65);
+}
+
+.read-more-btn:hover {
+  background-color:rgb(231, 121, 156)
+}
+
+.read-more-btn:active {
+  background-color: rgb(136, 10, 56);
+}
+
 .movie:hover .movie-over {
   transform: translateX(0%);
   

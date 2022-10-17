@@ -24,7 +24,7 @@ const Search = ({url, title, actualSearchTerm}) => {
     const listResponse = await fetch(api + `&page=${page+1}`);
     setPage(page+1);
     const listJSON = await listResponse.json();
-    console.log(listJSON);
+    // console.log(listJSON);
     setList(list.concat(listJSON.results));
   }
 
