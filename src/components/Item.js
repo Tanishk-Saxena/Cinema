@@ -18,13 +18,16 @@ const Item = (props) => {
 
     let {media_type, poster_path, overview, vote_average, title, name, id} = props.data;
     let itemName;
+    let itemType;
     if(!vote_average){
       vote_average=0;  
     }
     if(media_type === "movie" || title) {
         itemName=title;
+        itemType='movie';
     }else if(media_type === "tv" || name){
         itemName=name;
+        itemType='tv';
     }
 
     return (
@@ -37,7 +40,7 @@ const Item = (props) => {
             <div className="movie-over">
                 <h2>Overview: </h2>
                 <p>{overview}</p>
-                <Link to={`/details/${media_type}/${id}`}><button className="read-more-btn">Read More</button></Link>
+                <Link to={`/details/${itemType}/${id}`}><button className="read-more-btn">Read More</button></Link>
             </div>
         </div>
     )
