@@ -7,7 +7,7 @@ const Details = () => {
 
   const { media_type, id } = useParams();
   const api_key = process.env.REACT_APP_API_KEY;
-  const url1 = `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${api_key}`;
+  const url1 = `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${api_key}&append_to_response=videos`;
   const url2 = `https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=${api_key}`;
   
   const [details, setDetails] = useState({});
@@ -29,7 +29,7 @@ const Details = () => {
 
   const {
     //general
-    adult, backdrop_path, genres, homepage, spoken_languages, overview, poster_path, tagline, vote_average, status,
+    adult, backdrop_path, genres, homepage, spoken_languages, overview, poster_path, tagline, vote_average, status, videos,
     //movies
     budget, imdb_id, title, release_date, revenue, runtime,
     //tv
@@ -49,13 +49,13 @@ const Details = () => {
     team=cast.slice(0,6);
     let directors=0, producers=0, writers=0;
     crew.forEach(member => {
-      if(member.job === "Director" && directors < 3){
+      if((member.job === "Director" || member.department === "Directing") && directors < 3){
           team.push(member);
           directors += 1;
       }else if(member.department === "Writing" && writers < 3){
           team.push(member);
           writers += 1;
-      }else if(member.job === "Executive Producer" && producers < 3){
+      }else if((member.job === "Executive Producer" || member.job === "Producer") && producers < 3){
           team.push(member);
           producers += 1;
       }
@@ -68,9 +68,9 @@ const Details = () => {
 
     {media_type==="movie"?
     
-    <Movie adult={adult} backdrop_path={backdrop_path} genres={genres} homepage={homepage} spoken_languages={spoken_languages} overview={overview} poster_path={poster_path} tagline={tagline} vote_average={vote_average} status={status} budget={budget} imdb_id={imdb_id} title={title} release_date={release_date} revenue={revenue} runtime={runtime} team={team}/>:
+    <Movie adult={adult} backdrop_path={backdrop_path} genres={genres} homepage={homepage} spoken_languages={spoken_languages} overview={overview} poster_path={poster_path} tagline={tagline} vote_average={vote_average} status={status} budget={budget} imdb_id={imdb_id} title={title} release_date={release_date} revenue={revenue} runtime={runtime} team={team} videos={videos}/>:
     
-    <TV adult={adult} backdrop_path={backdrop_path} genres={genres} homepage={homepage} spoken_languages={spoken_languages} overview={overview} poster_path={poster_path} tagline={tagline} vote_average={vote_average} status={status} created_by={created_by} episode_run_time={episode_run_time} first_air_date={first_air_date} in_production={in_production} name={name} networks={networks} number_of_episodes={number_of_episodes} number_of_seasons={number_of_seasons} origin_country={origin_country} team={team}/>}
+    <TV adult={adult} backdrop_path={backdrop_path} genres={genres} homepage={homepage} spoken_languages={spoken_languages} overview={overview} poster_path={poster_path} tagline={tagline} vote_average={vote_average} status={status} created_by={created_by} episode_run_time={episode_run_time} first_air_date={first_air_date} in_production={in_production} name={name} networks={networks} number_of_episodes={number_of_episodes} number_of_seasons={number_of_seasons} origin_country={origin_country} team={team} videos={videos}/>}
     
     </>
   )
