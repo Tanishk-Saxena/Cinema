@@ -1,4 +1,5 @@
 import React from 'react';
+import Member from './Member';
 
 const images_api= "https://image.tmdb.org/t/p/w1280";
 
@@ -10,6 +11,30 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
       if(videos.results[i].name.includes("Trailer")){
         video_key=videos.results[i].key;
         break;
+      }
+    }
+    if(!video_key){
+      for(let i = 0; i < videos.results.length; i += 1){
+        if(videos.results[i].name.includes("Teaser")){
+          video_key=videos.results[i].key;
+          break;
+        }
+      }
+    }
+    if(!video_key){
+      for(let i = 0; i < videos.results.length; i += 1){
+        if(videos.results[i].name.includes("Spot")){
+          video_key=videos.results[i].key;
+          break;
+        }
+      }
+    }
+    if(!video_key){
+      for(let i = 0; i < videos.results.length; i += 1){
+        if(videos.results[i].name.includes("Promo")){
+          video_key=videos.results[i].key;
+          break;
+        }
       }
     }
   }
@@ -39,7 +64,7 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
       <div className="details-modal-header">
         <div className="item name">{title}</div>
         <img className='item poster' height="200px" width="133px" src={backdrop_path?images_api+poster_path:"https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"} />
-        <div className="item tagline">{`" ${tagline} "`}</div>
+        {tagline && <div className="item tagline">{`" ${tagline} "`}</div>}
       </div>
     
       <div className="details-modal-bar">
@@ -90,37 +115,57 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
             <span className="label">Runtime:</span>
             <span className="value"> {runtime}</span>
           </div>
-          <a href={homepage} target="blank" className="item homepage text-animation">
-            Visit</a>
+          <a href={homepage} target="blank" className="item homepage text-animation">Visit</a>
         </div>
       
       </div>
 
-      <div>Team:
-        Cast: 
-        {team && team.map((member, index)=>{
-          return (
-            <span key={index}> {member.known_for_department==="Acting"?member.name:''} </span>
-          );
-        })}
-        Director(s):
-        {team && team.map((member, index)=>{
-          return (
-            <span key={index}> {member.job==="Director"?member.name:''} </span>
-            );
-          })}
-        Producers:
-        {team && team.map((member, index)=>{
-          return (
-            <span key={index}> {member.job==="Executive Producer"?member.name:''} </span>
-            );
-          })}
-        Writers:
-        {team && team.map((member, index)=>{
-          return (
-            <span key={index}> {member.department==="Writing"?member.name:''} </span>
-            );
-          })}
+      <div className="details-modal-cast-and-crew">
+        <div className="item-heading text-animation">Cast and Crew</div>
+        <div className="item cast">
+          <div className="heading text-animation">Cast</div>
+          <div className="members">
+            {team && team.map((member, index)=>{
+              return (
+                (member.known_for_department==="Acting" && member.character) && 
+                <Member key={member.credit_id} name={member.name} image={member.profile_path} role={member.character}/>
+              );
+            })}
+          </div>
+        </div>
+        <div className="item directors">
+          <div className="heading text-animation">Director(s)</div>
+          <div className="members">
+            {team && team.map((member, index)=>{
+              return (
+                (member.job==="Director" || member.department==="Directing") && 
+                <Member key={member.credit_id} name={member.name} role={member.job} image={member.profile_path}/>
+              );
+            })}
+          </div>
+        </div>
+        <div className="item producers">
+          <div className="heading text-animation">Producer(s)</div>
+          <div className="members">
+            {team && team.map((member, index)=>{
+              return (
+                (member.job && member.job.includes("Producer")) && 
+                <Member key={member.credit_id} name={member.name} role={member.job} image={member.profile_path}/>
+              );
+            })}
+          </div>
+        </div>
+        <div className="item writers">
+          <div className="heading text-animation">Writer(s)</div>
+          <div className="members">
+            {team && team.map((member, index)=>{
+              return (
+                (member.department==="Writing") && 
+                <Member key={member.credit_id} name={member.name} role={member.job} image={member.profile_path}/>
+              );
+            })}
+          </div>
+        </div>
       </div>
     
     </div>

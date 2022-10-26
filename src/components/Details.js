@@ -44,9 +44,9 @@ const Details = () => {
       cast, crew
     } = itemCrew;
   
-    cast.sort(function(a,b){return a.popularity-b.popularity});
-    crew.sort(function(a,b){return a.popularity-b.popularity});
-    team=cast.slice(0,6);
+    cast.sort(function(a,b){return b.popularity-a.popularity});
+    crew.sort(function(a,b){return b.popularity-a.popularity});
+    team=cast.slice(0,Math.floor(cast.length*0.5));
     let directors=0, producers=0, writers=0;
     crew.forEach(member => {
       if((member.job === "Director" || member.department === "Directing") && directors < 3){

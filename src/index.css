@@ -169,7 +169,6 @@ code {
 
 .movie:hover .movie-over {
   transform: translateX(0%);
-  
 }
 
 .search {
@@ -285,6 +284,13 @@ code {
   top: -50px;
   width: 266px;
   height: 400px;
+  scale: 1;
+  transition: scale 0.2s ease-in-out;
+}
+
+.details-modal-header .item.poster:hover {
+  scale: 1.1;
+  transition: scale 0.2s ease-in-out;
 }
 
 .details-modal-header .item.name {
@@ -308,13 +314,15 @@ code {
 .details-modal-bar .item {
   padding: 4px;
   background-color: rgba(133, 133, 133, 0.562);
+  transition: background-color 0.2s ease-in-out;
   width: 190px;
   font-size: 15px;
   outline: rgba(255, 255, 255, 0.299) solid 2px;
 }
 
 .details-modal-bar .item:hover {
-  background-color: rgba(235, 229, 229, 0.53);
+  background-color: rgba(65, 65, 65, 0.562);
+  transition: background-color 0.2s ease-in-out
 }
 
 .details-modal-description {
@@ -328,8 +336,14 @@ code {
   max-width: 400px;
   margin: auto;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.215);
+  background-color: rgba(118, 117, 117, 0.397);
+  transition: background-color 0.2s ease-in-out;
   font-size: 1rem;
+}
+
+.details-modal-description .description-overview:hover {
+  transition: background-color 0.2s ease-in-out;
+  background-color: rgba(65, 65, 65, 0.562);
 }
 
 .details-modal-description .description-overview .item.overview {
@@ -353,8 +367,14 @@ code {
   width: 400px;
   margin: auto;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.215);
+  background-color: rgba(118, 117, 117, 0.397);
+  transition: background-color 0.2s ease-in-out;
   font-size: 1rem;
+}
+
+.details-modal-description .description-trivial:hover {
+  background-color: rgba(65, 65, 65, 0.562);
+  transition: background-color 0.2s ease-in-out;
 }
 
 .details-modal-description .description-trivial .item {
@@ -379,4 +399,121 @@ code {
 
 .details-modal-description .description-trivial .item .value {
   font-weight: 200;
+}
+
+.details-modal-networks {
+  background-color: rgba(118, 117, 117, 0.397);
+  transition: background-color 0.2s ease-in-out;
+  margin: auto;
+  padding: 20px;
+}
+
+.details-modal-networks:hover {
+  background-color: rgba(65, 65, 65, 0.562);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.details-modal-networks .item-heading {
+  width: fit-content;
+  margin: 0 auto 25px;
+  padding: 0 2px;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.details-modal-networks .members {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 25px;
+}
+
+.details-modal-networks .members .member {
+  height: 44px;
+  width: 107px;
+  padding: 5px;
+}
+
+.details-modal-networks .members .member .image {
+  height: 100%;
+  width: 100%;
+}
+
+.details-modal-cast-and-crew .item-heading {
+  font-weight: 500;
+  font-size: 2.5rem;
+  width: fit-content;
+  padding: 0 5px;
+  margin: 20px auto;
+}
+
+.details-modal-cast-and-crew .item {
+  background-color: rgba(118, 117, 117, 0.397);
+  transition: background-color 0.2s ease-in-out;
+  margin: 25px auto 25px;
+  padding: 25px 0 25px;
+}
+
+.details-modal-cast-and-crew .item.writers {
+  margin: 25px auto 0;
+  padding: 25px 0 25px;
+}
+
+.details-modal-cast-and-crew .item:hover {
+  background-color: rgba(65, 65, 65, 0.562);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.details-modal-cast-and-crew .item .heading {
+  font-size: 2rem;
+  width: fit-content;
+  padding: 0 5px;
+  margin: 0 auto 25px;
+}
+
+.details-modal-cast-and-crew .item .members {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 25px;
+}
+
+.details-modal-cast-and-crew .item .members .member {
+  position: relative;
+  height: 300px;
+  width: 200px;
+  overflow: hidden;
+}
+
+.details-modal-cast-and-crew .item .members .member .image {
+  height: 100%;
+  filter: brightness(0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  scale: 1;
+  transition: filter 0.2s ease-in-out, scale 0.2s ease-in-out;
+}
+
+.details-modal-cast-and-crew .item .members .member .image:hover {
+  filter: brightness(0.2);
+  scale: 1.2;
+  transition: filter 0.2s ease-in-out, scale 0.2s ease-in-out;
+}
+
+.details-modal-cast-and-crew .item .members .member .name {
+  position: absolute;
+  top: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 4px 10px;
+}
+
+.details-modal-cast-and-crew .item .members .member .role {
+  position: absolute;
+  font-size: 0.8rem;
+  text-align: left;
+  bottom: -20px;
+  padding: 10px;
 }

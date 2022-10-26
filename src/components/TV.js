@@ -1,4 +1,5 @@
 import React from 'react';
+import Member from './Member';
 
 const images_api= "https://image.tmdb.org/t/p/w1280";
 
@@ -10,6 +11,30 @@ const TV = ({adult, backdrop_path, genres, homepage, spoken_languages, overview,
       if(videos.results[i].name.includes("Trailer")){
         video_key=videos.results[i].key;
         break;
+      }
+    }
+    if(!video_key){
+      for(let i = 0; i < videos.results.length; i += 1){
+        if(videos.results[i].name.includes("Teaser")){
+          video_key=videos.results[i].key;
+          break;
+        }
+      }
+    }
+    if(!video_key){
+      for(let i = 0; i < videos.results.length; i += 1){
+        if(videos.results[i].name.includes("Spot")){
+          video_key=videos.results[i].key;
+          break;
+        }
+      }
+    }
+    if(!video_key){
+      for(let i = 0; i < videos.results.length; i += 1){
+        if(videos.results[i].name.includes("Promo")){
+          video_key=videos.results[i].key;
+          break;
+        }
       }
     }
   }
@@ -39,7 +64,7 @@ const TV = ({adult, backdrop_path, genres, homepage, spoken_languages, overview,
       <div className="details-modal-header">
         <div className="item name">{name}</div>
         <img className='item poster' height="200px" width="133px" src={backdrop_path?images_api+poster_path:"https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"} />
-        <div className="item tagline">{`" ${tagline} "`}</div>
+        {tagline && <div className="item tagline">{`" ${tagline} "`}</div>}
       </div>
 
       <div className="details-modal-bar">
@@ -102,42 +127,66 @@ const TV = ({adult, backdrop_path, genres, homepage, spoken_languages, overview,
       
       </div>
 
-      <div>Network(s):
-        {networks && networks.map((network, index)=>{
-          return <span key={index}> {network.name} </span>
-        })}
+      <div className="details-modal-networks">
+        <p className="item-heading text-animation">Network(s)</p>
+        <div className="members">
+          {networks && networks.map((network, index)=>{
+            return <div className="member"><img className="image" key={index} src={images_api+network.logo_path} alt={network.name}></img></div>
+          })}
+        </div>
       </div>
 
-      <div>Team:
-        Cast: 
-        {team && team.map((member, index)=>{
-          return (
-            <span key={index}> {member.known_for_department==="Acting"?member.name:''} </span>
-          );
-        })}
-        Director(s):
-        {team && team.map((member, index)=>{
-          return (
-            <span key={index}> {(member.job === "Director" || member.department==="Directing")?member.name:''} </span>
-          );
-        })}
-        {created_by && created_by.map((member, index)=>{
-          return (
-            <span key={index}> {member.name} </span>
-          );
-        })}
-        Producers:
-        {team && team.map((member, index)=>{
-          return (
-            <span key={index}> {(member.job==="Executive Producer" || member.job==="Producer")?member.name:''} </span>
-          );
-        })}
-        Writers:
-        {team && team.map((member, index)=>{
-          return (
-            <span key={index}> {member.department==="Writing"?member.name:''} </span>
-          );
-        })}
+      <div className="details-modal-cast-and-crew">
+        <div className="item-heading text-animation">Cast and Crew</div>
+        <div className="item cast">
+          <div className="heading text-animation">Cast</div>
+          <div className="members">
+            {team && team.map((member, index)=>{
+              return (
+                (member.known_for_department==="Acting" && member.character) && 
+                <Member key={member.credit_id} name={member.name} role="Actor" image={member.profile_path} character={member.character}/>
+              );
+            })}
+          </div>
+        </div>
+        <div className="item directors">
+          <div className="heading text-animation">Director(s)</div>
+          <div className="members">
+            {team && team.map((member, index)=>{
+              return (
+                (member.job === "Director" || member.department==="Directing") && 
+                <Member key={member.credit_id} name={member.name} role={member.job} image={member.profile_path}/>
+              );
+            })}
+            {created_by && created_by.map((member, index)=>{
+              return (
+                <Member key={member.credit_id} name={member.name} role={member.job} image={member.profile_path}/>
+              );
+            })}
+          </div>
+        </div>
+        <div className="item producers">
+          <div className="heading text-animation">Producer(s)</div>
+          <div className="members">
+            {team && team.map((member, index)=>{
+              return (
+                (member.job && member.job.includes("Producer")) && 
+                <Member key={member.credit_id} name={member.name} role={member.job} image={member.profile_path}/>
+              );
+            })}
+          </div>
+        </div>
+        <div className="item writers">
+          <div className="heading text-animation">Writer(s)</div>
+          <div className="members">
+            {team && team.map((member, index)=>{
+              return (
+                (member.department==="Writing") && 
+                <Member key={member.credit_id} name={member.name} role="Writer" character={member.job} image={member.profile_path}/>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
     </div>
