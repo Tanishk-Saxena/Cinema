@@ -28,6 +28,14 @@ const Search = ({url, title, actualSearchTerm}) => {
     setList(list.concat(listJSON.results));
   }
 
+  $(document).ready(function() {
+    $("body").attr("style", `background-image: none`);
+    $("body").removeClass("bg");
+  });
+  $(window).resize(function() {
+    $("body").attr("style", `background-image: none`);
+  });
+
   useEffect(() => {
     if(actualSearchTerm===''){
       navigate("/");

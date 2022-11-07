@@ -5,6 +5,24 @@ const images_api= "https://image.tmdb.org/t/p/w1280";
 
 const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overview, poster_path, tagline, vote_average, status, budget, imdb_id, title, release_date, revenue, runtime, team, videos}) => {
 
+  function setImageClass () {
+    switch(true){
+      case($(window).width()<425): $("body").attr("style", backdrop_path?`background-image: url(${images_api + poster_path}`:"background-color: none");
+      break;
+      default: $("body").attr("style", backdrop_path?`background-image: url(${images_api + backdrop_path}`:"background-color: none");
+      break;
+    }
+  }
+
+  $(document).ready(function() {
+    setImageClass();
+    $("body").addClass("bg");
+  });
+
+  $(window).resize(function() {
+    setImageClass();
+  });
+
   let video_key = null;
   if(videos){
     for(let i = 0; i < videos.results.length; i += 1){
@@ -39,11 +57,22 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
     }
   }
 
+  let cast = 0, directors = 0, producers = 0, writers = 0;
+  {team && team.forEach(member => {
+    if(member.known_for_department==="Acting" && member.character){
+      cast += 1;
+    }else if(member.job === "Director" || member.department==="Directing"){
+      directors += 1;
+    }else if(member.job && member.job.includes("Producer")){
+      producers += 1;
+    }else if(member.department==="Writing"){
+      writers += 1;
+    }
+  });}
+
   return (
     <>
-    <img className='backdrop_image' src={backdrop_path?images_api+backdrop_path:"https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"} />
-
-    <div className="details-header">
+    <div  className="details-header">
       <div className="details-header-text">
         <a className="item name text-animation" href={homepage} target="blank">{title}</a>
         <div className="item tagline">{tagline}</div>
@@ -64,7 +93,7 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
       <div className="details-modal-header">
         <div className="item name">{title}</div>
         <img className='item poster' height="200px" width="133px" src={backdrop_path?images_api+poster_path:"https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"} />
-        {tagline && <div className="item tagline">{`" ${tagline} "`}</div>}
+        {tagline && <div className="item tagline">{`"${tagline}"`}</div>}
       </div>
     
       <div className="details-modal-bar">
@@ -75,7 +104,7 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
     
       <div className="details-modal-description">
         
-        <div className="description-overview">
+        <div className="item description-overview">
           <div className="item overview">
             <span className="label">Overview:</span>
             <span className="value"> {overview}</span>
@@ -88,7 +117,7 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
           </div>
         </div>
 
-        <div className="description-trivial">
+        <div className="item description-trivial">
           <div className="item spoken-languages">
             <span className="label">Spoken Languages:</span>
             {spoken_languages && spoken_languages.map((language, index)=>{
@@ -122,8 +151,9 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
 
       <div className="details-modal-cast-and-crew">
         <div className="item-heading text-animation">Cast and Crew</div>
+        {cast!=0 && 
         <div className="item cast">
-          <div className="heading text-animation">Cast</div>
+        <div className="heading text-animation">Cast</div>
           <div className="members">
             {team && team.map((member, index)=>{
               return (
@@ -132,9 +162,10 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
               );
             })}
           </div>
-        </div>
+        </div>}
+        {directors!=0 && 
         <div className="item directors">
-          <div className="heading text-animation">Director(s)</div>
+        <div className="heading text-animation">Directors</div>
           <div className="members">
             {team && team.map((member, index)=>{
               return (
@@ -143,9 +174,10 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
               );
             })}
           </div>
-        </div>
+        </div>}
+        {producers != 0 &&
         <div className="item producers">
-          <div className="heading text-animation">Producer(s)</div>
+          <div className="heading text-animation">Producers</div>
           <div className="members">
             {team && team.map((member, index)=>{
               return (
@@ -154,9 +186,10 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
               );
             })}
           </div>
-        </div>
+        </div>}
+        {writers!=0 &&
         <div className="item writers">
-          <div className="heading text-animation">Writer(s)</div>
+          <div className="heading text-animation">Writers</div>
           <div className="members">
             {team && team.map((member, index)=>{
               return (
@@ -165,9 +198,8 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
               );
             })}
           </div>
-        </div>
+        </div>}
       </div>
-    
     </div>
     </>
   )
