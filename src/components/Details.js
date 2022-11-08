@@ -72,6 +72,8 @@ const Details = () => {
     
     <TV adult={adult} backdrop_path={backdrop_path} genres={genres} homepage={homepage} spoken_languages={spoken_languages} overview={overview} poster_path={poster_path} tagline={tagline} vote_average={vote_average} status={status} created_by={created_by} episode_run_time={episode_run_time} first_air_date={first_air_date} in_production={in_production} name={name} networks={networks} number_of_episodes={number_of_episodes} number_of_seasons={number_of_seasons} origin_country={origin_country} team={team} videos={videos}/>}
     
+    <footer class="footer">Made with 💖 by Tanishk</footer>
+
     </>
   )
 }

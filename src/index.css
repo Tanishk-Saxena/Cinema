@@ -119,9 +119,18 @@ code {
   transition: transform 0.25s ease-in-out;
 }
 
-.text-animation:hover:after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+@media screen and (max-width: 1023px) {
+  .text-animation:after {
+    transform: none;
+    animation: 1s ease-in-out 0s 1 slideInLeft;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .text-animation:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
 }
 
 
@@ -328,7 +337,7 @@ code {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  text-align: center;
+  text-align: left;
   height: 95vh;
   padding: 5vh 0;
 }
@@ -388,6 +397,7 @@ code {
     flex-direction: column-reverse;
     align-items: stretch;
     justify-content: space-between;
+    text-align: center;
     height: fit-content;
     gap: 20px;
     padding: 0;
@@ -426,68 +436,91 @@ code {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  height: 50vw;
+  margin: 10px 0;
 }
 
 .details-modal-header .item {
-  flex-basis: 23vw;
+  flex-basis: 30vw;
   flex-grow: 0;
   flex-shrink: 0;
 }
 
-.details-modal-header .item.poster {
+.details-modal-header .item.poster-container .poster {
   position: relative;
-  top: -50px;
   height: auto;
+  width: 100%;
   scale: 1;
   transition: scale 0.2s ease-in-out;
 }
 
-.details-modal-header .item.poster:hover {
+.details-modal-header .item.poster-container .poster:hover {
   scale: 1.1;
   transition: scale 0.2s ease-in-out;
 }
 
-.details-modal-header .item.name {
+.details-modal-header .item.title-container {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  align-items: flex-end;
+}
+
+.details-modal-header .item.title-container .item {
+  flex-basis: auto;
+  max-width: 30vw;
+  text-align: right;
+}
+
+.details-modal-header .item.title-container .item.name {
   font-size: 3rem;
   width: 300px;
 }
 
-.details-modal-header .item.tagline {
+.details-modal-header .item.title-container .item.tagline {
   font-size: 1.5rem;
+  font-weight: 400;
+  filter: brightness(0.8);
   width: 300px;
 }
 
 @media screen and (max-width: 1024px) {
-  .details-modal-header .item.name {
+  .details-modal-header .item.title-container .item.name {
     font-size: 2rem;
   }
   
-  .details-modal-header .item.tagline {
+  .details-modal-header .item.title-container .item.tagline {
     font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .details-modal-header .item.title-container .item.name {
+    font-size: 1.8rem;
+  }
+  
+  .details-modal-header .item.title-container .item.tagline {
+    font-size: 0.8rem;
   }
 }
 
 @media screen and (max-width: 426px) {
-  .details-modal-header .item.name {
-    font-size: 1.5rem;
+  .details-modal-header .item.title-container .item.name {
+    font-size: 1.2rem;
   }
   
-  .details-modal-header .item.tagline {
-    font-size: 1rem;
+  .details-modal-header .item.title-container .item.tagline {
+    font-size: 0.7rem;
   }
 }
 
 @media screen and (max-width: 321px) {
-  .details-modal-header .item.name {
+  .details-modal-header .item.title-container .item.name {
     font-size: 1rem;
   }
   
-  .details-modal-header .item.tagline {
-    font-size: 0.75rem;
-  }
-  .details-modal-header .item.poster {
-    height: 100%;
-    width: 50%;
+  .details-modal-header .item.title-container .item.tagline {
+    font-size: 0.65rem;
   }
 }
 
@@ -501,7 +534,7 @@ code {
 }
 
 .details-modal-bar .item {
-  flex-basis: 20vw;
+  flex-basis: 23.88vw;
   flex-grow: 0;
   flex-shrink: 0;
   font-size: 15px;
@@ -783,4 +816,11 @@ code {
     height: 47.49vw;
     width: 31.66vw;
   }
+}
+
+.footer {
+  text-align: center;
+  padding-bottom: 10px;
+  font-weight: 400;
+  filter: brightness(0.6);
 }

@@ -15,16 +15,14 @@ const Search = ({url, title, actualSearchTerm}) => {
   const fetchList = async (api) => {
     const listResponse = await fetch(api);
     const listJSON = await listResponse.json();
-    // console.log(listJSON);
     setTotalResults(listJSON.total_results);
     setList(listJSON.results);
   }
 
-  const fetchMore = async (api, page) => {
-    const listResponse = await fetch(api + `&page=${page+1}`);
-    setPage(page+1);
+  const fetchMore = async (api, pg) => {
+    const listResponse = await fetch(api + `&page=${pg}`);
+    setPage(pg);
     const listJSON = await listResponse.json();
-    // console.log(listJSON);
     setList(list.concat(listJSON.results));
   }
 
@@ -48,7 +46,7 @@ const Search = ({url, title, actualSearchTerm}) => {
   return (
     <InfiniteScroll
       dataLength={list.length} //This is important field to render the next data
-      next={()=>{fetchMore(url, page)}}
+      next={()=>{fetchMore(url, page+1)}}
       hasMore={list.length<totalResults}
       loader={<Spinner/>}
       endMessage={

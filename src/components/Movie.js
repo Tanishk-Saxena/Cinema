@@ -91,9 +91,13 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
       
     
       <div className="details-modal-header">
-        <div className="item name">{title}</div>
-        <img className='item poster' height="200px" width="133px" src={backdrop_path?images_api+poster_path:"https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"} />
-        {tagline && <div className="item tagline">{`"${tagline}"`}</div>}
+        <div className="item poster-container">
+          <img className='poster' height="200px" width="133px" src={backdrop_path?images_api+poster_path:"https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"} />
+        </div>
+        <div className="item title-container">
+          <div className="item name">{title}</div>
+          {tagline && <div className="item tagline">{`"${tagline}"`}</div>}
+        </div>
       </div>
     
       <div className="details-modal-bar">
