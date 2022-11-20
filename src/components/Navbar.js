@@ -25,7 +25,7 @@ const Navbar = ({setActualSearchTerm}) => {
         <div>
             <nav className=" navbar navbar-expand-lg bg-dark navbar-dark">
                 <div className="container-fluid">
-                    <Link to='/'><img className="navbar-brand" src={require("../images/cinema (2).png")} height="60px" /></Link>
+                    <Link to='/'><img className="navbar-brand" src={require("../images/cinema (2).png")} alt="logo" height="60px" /></Link>
                     <Link className="navbar-brand brand-text brand-text-animation" to="/">Cinema</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

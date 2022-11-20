@@ -24,6 +24,7 @@ const Details = () => {
 
   useEffect(() => { 
     fetch_data(url1, url2);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 

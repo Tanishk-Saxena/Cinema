@@ -1,4 +1,5 @@
 /* eslint-env jquery */
+/*eslint-env es6*/
 import React from 'react';
 import Member from './Member';
 
@@ -81,7 +82,7 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
       </div>
       <div className="details-header-video">
         {video_key && 
-          <iframe className="item video" 
+          <iframe className="item video" title="trailer" 
           src={`https://www.youtube.com/embed/${video_key}?autoplay=1&mute=1&playlist=${video_key}&loop=1`}>
           </iframe>
         }
@@ -93,7 +94,7 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
     
       <div className="details-modal-header">
         <div className="item poster-container">
-          <img className='poster' height="200px" width="133px" src={backdrop_path?images_api+poster_path:"https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"} />
+          <img className='poster' height="200px" width="133px" src={backdrop_path?images_api+poster_path:"https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"} alt="poster" />
         </div>
         <div className="item title-container">
           <div className="item name">{title}</div>
@@ -156,7 +157,7 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
 
       <div className="details-modal-cast-and-crew">
         <div className="item-heading text-animation">Cast and Crew</div>
-        {cast!=0 && 
+        {cast!==0 && 
         <div className="item cast">
         <div className="heading text-animation">Cast</div>
           <div className="members">
@@ -168,7 +169,7 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
             })}
           </div>
         </div>}
-        {directors!=0 && 
+        {directors!==0 && 
         <div className="item directors">
         <div className="heading text-animation">Directors</div>
           <div className="members">
@@ -180,7 +181,7 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
             })}
           </div>
         </div>}
-        {producers != 0 &&
+        {producers !== 0 &&
         <div className="item producers">
           <div className="heading text-animation">Producers</div>
           <div className="members">
@@ -192,7 +193,7 @@ const Movie = ({adult, backdrop_path, genres, homepage, spoken_languages, overvi
             })}
           </div>
         </div>}
-        {writers!=0 &&
+        {writers!==0 &&
         <div className="item writers">
           <div className="heading text-animation">Writers</div>
           <div className="members">
