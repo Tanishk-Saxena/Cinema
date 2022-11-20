@@ -1,5 +1,4 @@
 /* eslint-env jquery */
-/*eslint-env es6*/
 import React from 'react';
 import Member from './Member';
 
@@ -60,7 +59,7 @@ const TV = ({adult, backdrop_path, genres, homepage, spoken_languages, overview,
   }
 
   let cast = 0, directors = 0, producers = 0, writers = 0;
-  {team && team.forEach(member => {
+  team && team.forEach(member => {
     if(member.known_for_department==="Acting" && member.character){
       cast += 1;
     }else if(member.job === "Director" || member.department==="Directing"){
@@ -70,7 +69,7 @@ const TV = ({adult, backdrop_path, genres, homepage, spoken_languages, overview,
     }else if(member.department==="Writing"){
       writers += 1;
     }
-  });}
+  });
 
   return (
     <>
