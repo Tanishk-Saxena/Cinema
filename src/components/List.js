@@ -1,3 +1,4 @@
+/* eslint-env jquery */
 import React, {useEffect, useState} from 'react';
 import Item from './Item';
 import InfiniteScroll from 'react-infinite-scroll-component';

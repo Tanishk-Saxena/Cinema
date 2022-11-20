@@ -1,3 +1,4 @@
+/* eslint-env jquery */
 import React from 'react';
 import Member from './Member';
 
