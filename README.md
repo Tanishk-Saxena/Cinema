@@ -24,7 +24,7 @@ https://cinemawebcatalogue.netlify.app/
 Clone the project
 
 ```bash
-  git clone https://github.com/Tanishk-Saxena/Spend-Adani-Fortune---Frontend
+  git clone https://github.com/Tanishk-Saxena/Cinema
 ```
 
 Go to the project directory
